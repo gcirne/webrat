@@ -7,6 +7,8 @@ module Webrat
         include Webrat::Selenium::SilenceStream
 
         def boot
+          return unless boot_application?
+
           start
           wait
           stop_at_exit
@@ -38,6 +40,12 @@ module Webrat
         def prepare_pid_file(file_path, pid_file_name)
           FileUtils.mkdir_p File.expand_path(file_path)
           File.expand_path("#{file_path}/#{pid_file_name}")
+        end
+
+        private
+
+        def boot_application?
+          Webrat.configuration.boot_application
         end
 
       end

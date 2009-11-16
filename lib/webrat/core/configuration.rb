@@ -26,6 +26,9 @@ module Webrat
     # Save and open pages with error status codes (500-599) in a browser? Defualts to true.
     attr_writer :open_error_files
 
+    # Should an instance of the application be booted when testing with selenium? Defaults to true.
+    attr_accessor :boot_application
+
     # Which rails environment should the selenium tests be run in? Defaults to selenium.
     attr_accessor :application_environment
     webrat_deprecate :selenium_environment, :application_environment
@@ -60,6 +63,7 @@ module Webrat
 
     def initialize # :nodoc:
       self.open_error_files = true
+      self.boot_application = true
       self.application_environment = :test
       self.application_port = 3001
       self.application_address = 'localhost'
